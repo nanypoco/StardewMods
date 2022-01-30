@@ -28,7 +28,7 @@ internal class BetterChestsApi : IBetterChestsApi
 
     private IEnumerable<string[]> Craftables
     {
-        get => this.Helper.Content.Load<Dictionary<int, string>>(BetterChestsApi.CraftablesData, ContentSource.GameContent).Values.Select(info => info.Split('/'));
+        get => this.Helper.Content.Load<Dictionary<string, string>>(BetterChestsApi.CraftablesData, ContentSource.GameContent).Values.Select(info => info.Split('/'));
     }
 
     /// <inheritdoc/>

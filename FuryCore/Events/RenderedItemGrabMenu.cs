@@ -52,7 +52,7 @@ internal class RenderedItemGrabMenu : SortedEventHandler<RenderedActiveMenuEvent
         {
             if (this._menu.Value.ItemGrabMenu.hoverAmount > 0)
             {
-                IClickableMenu.drawToolTip(e.SpriteBatch, this._menu.Value.ItemGrabMenu.hoverText, string.Empty, null, true, -1, 0, -1, -1, null, this._menu.Value.ItemGrabMenu.hoverAmount);
+                IClickableMenu.drawToolTip(e.SpriteBatch, this._menu.Value.ItemGrabMenu.hoverText, string.Empty, null, true, -1, 0, null, -1, null, this._menu.Value.ItemGrabMenu.hoverAmount);
             }
             else
             {

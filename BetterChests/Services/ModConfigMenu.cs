@@ -48,7 +48,7 @@ internal class ModConfigMenu : IModService, IModConfigMenu
 
     private IEnumerable<string[]> Craftables
     {
-        get => this.Helper.Content.Load<Dictionary<int, string>>(ModConfigMenu.CraftablesData, ContentSource.GameContent).Values.Select(info => info.Split('/'));
+        get => this.Helper.Content.Load<Dictionary<string, string>>(ModConfigMenu.CraftablesData, ContentSource.GameContent).Values.Select(info => info.Split('/'));
     }
 
     /// <inheritdoc/>

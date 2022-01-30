@@ -19,7 +19,7 @@ internal class ManagedChests : IModService
     private const string CraftablesData = "Data/BigCraftablesInformation";
     private readonly PerScreen<IList<ManagedChest>> _placedChests = new(() => null);
     private readonly PerScreen<IList<ManagedChest>> _accessibleChests = new(() => null);
-    private Dictionary<int, string[]> _craftables;
+    private Dictionary<string, string[]> _craftables;
     private IList<ManagedChest> _playerChests;
 
     /// <summary>
@@ -50,9 +50,9 @@ internal class ManagedChests : IModService
 
     private IDictionary<string, IChestModel> ChestConfigs { get; } = new Dictionary<string, IChestModel>();
 
-    private Dictionary<int, string[]> Craftables
+    private Dictionary<string, string[]> Craftables
     {
-        get => this._craftables ??= this.Helper.Content.Load<Dictionary<int, string>>(ManagedChests.CraftablesData, ContentSource.GameContent)
+        get => this._craftables ??= this.Helper.Content.Load<Dictionary<string, string>>(ManagedChests.CraftablesData, ContentSource.GameContent)
                    .ToDictionary(
                        info => info.Key,
                        info => info.Value.Split('/'));
@@ -74,7 +74,7 @@ internal class ManagedChests : IModService
                 where item.Value is Chest chest
                       && chest.playerChest.Value
                       && chest.SpecialChestType is Chest.SpecialChestTypes.None or Chest.SpecialChestTypes.JunimoChest or Chest.SpecialChestTypes.MiniShippingBin
-                      && info.Key == chest.ParentSheetIndex
+                      && chest.QualifiedItemID == $"(BC){info.Key}"
                 select (chest: item.Value as Chest, location, position: item.Key, name: info.Value[0]);
 
             // Add fridge
@@ -117,7 +117,7 @@ internal class ManagedChests : IModService
                       && chest.playerChest.Value
                       && chest.SpecialChestType is Chest.SpecialChestTypes.None or Chest.SpecialChestTypes.JunimoChest or Chest.SpecialChestTypes.MiniShippingBin
                       && chest.Stack == 1
-                      && info.Key == chest.ParentSheetIndex
+                      && chest.QualifiedItemID == $"(BC){info.Key}"
                 select (chest: item.item as Chest, player, item.index, name: info.Value[0]);
 
             return this._playerChests = playerChests.Select(

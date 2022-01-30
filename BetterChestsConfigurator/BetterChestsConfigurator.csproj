@@ -12,4 +12,7 @@
             <Private>false</Private>
         </Reference>
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\BetterChests\BetterChests.csproj" />
+    </ItemGroup>
 </Project>
